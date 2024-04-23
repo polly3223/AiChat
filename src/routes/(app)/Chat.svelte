@@ -10,9 +10,7 @@
 		md = MarkdownIt();
 
 		const shiki = await Shiki({
-			themes: {
-				light: 'slack-dark'
-			}
+			themes: { light: 'github-dark' }
 		});
 
 		md.use(shiki);
