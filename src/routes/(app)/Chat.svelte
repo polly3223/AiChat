@@ -1,35 +1,40 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { derived, type Readable } from 'svelte/store';
 	import MarkdownIt from 'markdown-it';
 	import Shiki from '@shikijs/markdown-it';
+	import type { Message, RenderedMessage } from '$lib/types';
 
-	let md: MarkdownIt;
-	let renderedMessages: { user: 'user' | 'ai'; text: string; renderedText: string }[] = [];
+	export let messages: Readable<Message[]>;
 
-	async function init() {
-		md = MarkdownIt();
+	let markdownIt: MarkdownIt;
 
-		const shiki = await Shiki({
-			themes: { light: 'github-dark' }
+	function getMd(): Promise<MarkdownIt> {
+		if (markdownIt) return Promise.resolve(markdownIt);
+		return new Promise(async (resolve) => {
+			markdownIt = MarkdownIt();
+			const shiki = await Shiki({
+				themes: { light: 'github-dark' }
+			});
+			markdownIt.use(shiki);
+			resolve(markdownIt);
 		});
-
-		md.use(shiki);
-
-		renderedMessages = messages.map((message) => ({
-			...message,
-			renderedText: md ? md.render(message.text) : ''
-		}));
 	}
 
-	onMount(init);
-
-	export let messages: { user: 'user' | 'ai'; text: string }[];
+	export const renderedMessages = derived<Readable<Message[]>, RenderedMessage[]>(
+		messages,
+		($messages, set) => {
+			getMd().then((md) => {
+				set($messages.map((message) => ({ ...message, renderedText: md.render(message.text) })));
+			});
+		},
+		[]
+	);
 </script>
 
 <div class="flex flex-col pt-4">
-	{#each renderedMessages as message}
+	{#each $renderedMessages as message}
 		<div
-			class={`overflow-hidden px-3 py-2 m-2 rounded-lg shadow-sm ring-1 ring-inset ring-gray-300 bg-white ${message.user === 'user' ? 'ml-auto bg-blue-50' : 'mr-auto'}`}
+			class={`overflow-hidden px-3 py-2 m-2 rounded-lg shadow-sm ring-1 ring-inset ring-gray-300 bg-white ${message.user === 'user' ? 'ml-auto bg-blue-100' : 'mr-auto'}`}
 		>
 			<div class="prose prose-sm max-w-[250px] md:max-w-[500px] lg:max-w-[1200px] overflow-y-auto">
 				{@html message.renderedText}

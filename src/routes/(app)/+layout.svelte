@@ -76,12 +76,6 @@
 		</button>
 	</div>
 
-	<!-- <main class="py-10 lg:pl-72 bg-gray-100">
-		<div class="px-4 sm:px-6 lg:px-8">
-			<slot />
-		</div>
-	</main> -->
-
 	<main class="lg:pl-72 bg-gray-100">
 		<slot />
 	</main>
