@@ -2,7 +2,12 @@
 export default {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	theme: {
-		extend: {}
+		extend: {
+			fontFamily: {
+				sans: ['Geist'],
+				mono: ['GeistMono']
+			}
+		}
 	},
 	plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms')]
 };
