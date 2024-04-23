@@ -66,10 +66,10 @@ These functions take a list of numbers as input and return the maximum number in
 </script>
 
 <div class="flex flex-col h-[calc(100dvh-56px)] lg:h-dvh">
-	<div class="overflow-auto px-6 py-4">
+	<div class="overflow-auto p-2">
 		<Chat {messages} />
 	</div>
-	<div class="mt-auto px-6 py-4">
+	<div class="mt-auto p-2 pt-0">
 		<TextArea />
 	</div>
 </div>

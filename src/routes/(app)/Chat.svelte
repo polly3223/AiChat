@@ -29,9 +29,9 @@
 <div class="flex flex-col pt-4">
 	{#each renderedMessages as message}
 		<div
-			class={`overflow-hidden rounded-md bg-white px-6 py-4 m-2 shadow ${message.user === 'user' ? 'ml-auto' : 'mr-auto'}`}
+			class={`overflow-hidden px-3 py-2 m-2 rounded-lg shadow-sm ring-1 ring-inset ring-gray-300 bg-white ${message.user === 'user' ? 'ml-auto bg-blue-50' : 'mr-auto'}`}
 		>
-			<div class="prose">
+			<div class="prose prose-sm max-w-[250px] md:max-w-[500px] lg:max-w-[1200px] overflow-y-auto">
 				{@html message.renderedText}
 			</div>
 		</div>
