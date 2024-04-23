@@ -13,10 +13,12 @@
 	>
 		<div class="fixed inset-0 bg-gray-900/80"></div>
 
-		<div class="fixed inset-0 flex">
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<!-- svelte-ignore a11y-no-static-element-interactions -->
+		<div class="fixed inset-0 flex" on:click={() => (mobileShowSidebar = false)}>
 			<div class="relative mr-16 flex w-full max-w-xs flex-1">
 				<div class="absolute left-full top-0 flex w-16 justify-center pt-5">
-					<button on:click={() => (mobileShowSidebar = false)} type="button" class="-m-2.5 p-2.5">
+					<button type="button" class="-m-2.5 p-2.5">
 						<span class="sr-only">Close sidebar</span>
 						<svg
 							class="h-6 w-6 text-white"
@@ -30,8 +32,10 @@
 						</svg>
 					</button>
 				</div>
-
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<!-- svelte-ignore a11y-no-static-element-interactions -->
 				<div
+					on:click|stopPropagation
 					class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-2 ring-1 ring-white/10"
 				>
 					<Sidebar />
