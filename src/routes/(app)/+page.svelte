@@ -4,50 +4,62 @@
 
 	const messages: { user: 'user' | 'ai'; text: string }[] = [
 		{ user: 'user', text: 'hello' },
-		{ user: 'ai', text: 'Hello! How can I help you today?' },
-		{ user: 'user', text: 'I need help with my order' },
 		{
 			user: 'ai',
-			text: `Implementing exponential moving averages (EMA) in neural networks involves updating the model's parameters based on a weighted average of the current parameter values and the new incoming data. Here's a basic outline of how you could implement EMA in a neural network:
+			text: `Sure! Here's a function in each of the requested languages to find the maximum number in a list:
 
-1. **Initialize Parameters**: Start by initializing the parameters of your neural network as usual.
-
-2. **Define EMA Coefficients**: Choose an exponential decay factor, often denoted as α (alpha), which determines the weight given to the most recent data point. Typically, α is a value between 0 and 1.
-
-3. **Update Parameters with EMA**: During training, for each parameter in the neural network, calculate the exponential moving average using the formula:
-
-   \(EMA_t = α \times \text{parameter}_t + (1 - α) \times \text{EMA}_{t-1}\)
-
-   Where:
-   - \(EMA_t\) is the EMA at time \(t\).
-   - \(\text{parameter}_t\) is the current value of the parameter at time \(t\).
-   - \(\text{EMA}_{t-1}\) is the previous EMA value.
-
-4. **Apply EMA to Gradients (Optional)**: Additionally, you can apply EMA to the gradients during optimization to further stabilize training and prevent sudden changes in parameter updates. This is often done to achieve a smoother optimization process.
-
-5. **Use EMA Parameters for Inference**: During inference (when making predictions), use the EMA parameters instead of the original parameters for a more stable and possibly better-performing model.
-
-Here's a simple Python-like pseudo-code example of how you might implement EMA for the weights of a neural network layer:
-
+1. Python:
 \`\`\`python
-# Initialize parameters and EMA variables
-weights = initialize_weights()
-ema_weights = weights.copy()  # Initialize EMA weights with the same values as weights
-
-alpha = 0.9  # Exponential decay factor
-
-# Training loop
-for each batch:
-    # Forward pass, backward pass, compute gradients
-    # Update weights as usual
-    # Update EMA weights
-    for each weight in weights:
-        ema_weights[weight] = alpha * weights[weight] + (1 - alpha) * ema_weights[weight]
-
-# During inference, use EMA weights instead of original weights
+def find_max(nums):
+    if not nums:
+        return None
+    return max(nums)
 \`\`\`
 
-This is a basic example to illustrate the concept. Depending on your specific implementation and framework, you may need to adapt it accordingly.`
+2. TypeScript:
+\`\`\`typescript
+function findMax(nums: number[]): number | undefined {
+    if (nums.length === 0) {
+        return undefined;
+    }
+    return Math.max(...nums);
+}
+\`\`\`
+
+3. Java:
+\`\`\`java
+import java.util.Collections;
+import java.util.List;
+
+public class MaxNumber {
+    public static Integer findMax(List<Integer> nums) {
+        if (nums.isEmpty()) {
+            return null;
+        }
+        return Collections.max(nums);
+    }
+}
+\`\`\`
+
+4. Rust:
+\`\`\`rust
+fn find_max(nums: &[i32]) -> Option<i32> {
+    if nums.is_empty() {
+        None
+    } else {
+        Some(*nums.iter().max().unwrap())
+    }
+}
+\`\`\`
+
+These functions take a list of numbers as input and return the maximum number in the list.            
+            
+            `
+		},
+		{ user: 'user', text: '123456' },
+		{
+			user: 'ai',
+			text: `heloo geloo`
 		},
 		{ user: 'user', text: '123456' }
 	];
