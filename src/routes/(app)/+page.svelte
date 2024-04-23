@@ -3,7 +3,7 @@
 	import TextArea from './TextArea.svelte';
 </script>
 
-<div class="flex flex-col h-dvh">
+<div class="flex flex-col h-[calc(100dvh-56px)] lg:h-dvh">
 	<div class="overflow-auto px-6 py-4">
 		<Chat />
 	</div>
