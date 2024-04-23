@@ -62,6 +62,9 @@ devDependencies:
   vite:
     specifier: ^5.0.3
     version: 5.2.10
+  zod:
+    specifier: ^3.23.4
+    version: 3.23.4
 
 packages:
 
@@ -2068,4 +2071,8 @@ packages:
     resolution: {integrity: sha512-pIXzoImaqmfOrL7teGUBt/T7ZDnyeGBWyXQBvOVhLkWLN37GXv8NMLK406UY6dS51JfcQHsmcW5cJ441bHg6Lg==}
     engines: {node: '>= 14'}
     hasBin: true
+    dev: true
+
+  /zod@3.23.4:
+    resolution: {integrity: sha512-/AtWOKbBgjzEYYQRNfoGKHObgfAZag6qUJX1VbHo2PRBgS+wfWagEY2mizjfyAPcGesrJOcx/wcl0L9WnVrHFw==}
     dev: true

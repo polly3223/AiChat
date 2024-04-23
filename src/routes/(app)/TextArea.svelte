@@ -8,6 +8,7 @@
 	const dispatch = createEventDispatcher();
 
 	function sendMessage() {
+		if (text.trim() === '') return;
 		dispatch('message', { text });
 		text = '';
 	}
