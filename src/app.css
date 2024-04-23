@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* -------------------------------------- */
+
+@font-face {
+	font-family: 'Geist';
+	font-weight: 100;
+	src: url('/fonts/Geist/Geist-Thin.otf');
+}
+@font-face {
+	font-family: 'Geist';
+	font-weight: 200;
+	src: url('/fonts/Geist/Geist-UltraLight.otf');
+}
+@font-face {
+	font-family: 'Geist';
+	font-weight: 300;
+	src: url('/fonts/Geist/Geist-Light.otf');
+}
+@font-face {
+	font-family: 'Geist';
+	font-weight: 400;
+	src: url('/fonts/Geist/Geist-Regular.otf');
+}
+@font-face {
+	font-family: 'Geist';
+	font-weight: 500;
+	src: url('/fonts/Geist/Geist-Medium.otf');
+}
+@font-face {
+	font-family: 'Geist';
+	font-weight: 600;
+	src: url('/fonts/Geist/Geist-SemiBold.otf');
+}
+@font-face {
+	font-family: 'Geist';
+	font-weight: 700;
+	src: url('/fonts/Geist/Geist-Bold.otf');
+}
+@font-face {
+	font-family: 'Geist';
+	font-weight: 800;
+	src: url('/fonts/Geist/Geist-Black.otf');
+}
+@font-face {
+	font-family: 'Geist';
+	font-weight: 900;
+	src: url('/fonts/Geist/Geist-UltraBlack.otf');
+}
+
+/* -------------------------------------- */
+
+@font-face {
+	font-family: 'GeistMono';
+	font-weight: 100;
+	src: url('/fonts/Geist.Mono/GeistMono-Thin.otf');
+}
+@font-face {
+	font-family: 'GeistMono';
+	font-weight: 200;
+	src: url('/fonts/Geist.Mono/GeistMono-UltraLight.otf');
+}
+@font-face {
+	font-family: 'GeistMono';
+	font-weight: 300;
+	src: url('/fonts/Geist.Mono/GeistMono-Light.otf');
+}
+@font-face {
+	font-family: 'GeistMono';
+	font-weight: 400;
+	src: url('/fonts/Geist.Mono/GeistMono-Regular.otf');
+}
+@font-face {
+	font-family: 'GeistMono';
+	font-weight: 500;
+	src: url('/fonts/Geist.Mono/GeistMono-Medium.otf');
+}
+@font-face {
+	font-family: 'GeistMono';
+	font-weight: 600;
+	src: url('/fonts/Geist.Mono/GeistMono-SemiBold.otf');
+}
+@font-face {
+	font-family: 'GeistMono';
+	font-weight: 700;
+	src: url('/fonts/Geist.Mono/GeistMono-Bold.otf');
+}
+@font-face {
+	font-family: 'GeistMono';
+	font-weight: 800;
+	src: url('/fonts/Geist.Mono/GeistMono-Black.otf');
+}
+@font-face {
+	font-family: 'GeistMono';
+	font-weight: 900;
+	src: url('/fonts/Geist.Mono/GeistMono-UltraBlack.otf');
+}
