@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { SECRET_TOGHETERAI_API_KEY } from '$env/static/private';
-import { messageSchema, type Message } from '../client/types';
+import { messageSchema, type Message, type Chat } from '../client/types';
 
 const chatCompletionSchema = z.object({
 	id: z.string(),
@@ -32,8 +32,8 @@ console.log('Hello, World!');
 
 so that the code is syntax highlighted.`;
 
-export async function fetchCompletion(messages: Message[]): Promise<Message | null> {
-	const msgList = [{ role: 'system', content: system }, ...messages];
+export async function fetchCompletion(chat: Chat): Promise<Message | null> {
+	const msgList = [{ role: 'system', content: system }, ...chat.messages];
 
 	try {
 		const response = await fetch('https://api.together.xyz/v1/chat/completions', {

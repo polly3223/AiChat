@@ -59,8 +59,6 @@
 						History
 					</a>
 				</li>
-
-				{$page.url.pathname}
 			</ul>
 		</li>
 	</ul>

@@ -5,11 +5,18 @@ export const messageSchema = z.object({
 	content: z.string()
 });
 
+export const chatSchema = z.object({
+	_id: z.string(),
+	name: z.string(),
+	messages: z.array(messageSchema)
+});
+
 export type Message = z.infer<typeof messageSchema>;
+export type Chat = z.infer<typeof chatSchema>;
 export type RenderedMessage = Message & { renderedText: string };
 
 export const reqAiChatSchema = z.object({
-	messages: z.array(messageSchema)
+	chat: chatSchema
 });
 
 export const reqAuth = z.object({

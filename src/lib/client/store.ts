@@ -24,14 +24,11 @@ messages.subscribe(async (msgs) => {
 });
 
 let markdownIt: MarkdownIt;
-
 function getMd(): Promise<MarkdownIt> {
 	if (markdownIt) return Promise.resolve(markdownIt);
 	return new Promise(async (resolve) => {
 		markdownIt = MarkdownIt();
-		const shiki = await Shiki({
-			themes: { light: 'github-dark' }
-		});
+		const shiki = await Shiki({ themes: { light: 'github-dark' } });
 		markdownIt.use(shiki);
 		resolve(markdownIt);
 	});
