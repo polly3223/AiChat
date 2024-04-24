@@ -33,13 +33,13 @@
 		</form>
 	</div>
 </div>
-
+<!-- class="inline-flex items-center align-items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600" -->
 <div class="flex justify-center pt-4">
 	<div class="flex-shrink-0">
 		<button
 			on:click={sendMessage}
 			type="submit"
-			class="inline-flex items-center align-items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+			class="inline-flex items-center align-items-center justify-center rounded-md bg-blue-100 px-2.5 py-1.5 text-sm font-semibold text-blue-600 shadow-sm hover:bg-blue-200"
 		>
 			Send message
 			<svg
