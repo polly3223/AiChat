@@ -44,6 +44,7 @@ export async function fetchCompletion(messages: Message[]): Promise<Message | nu
 			},
 			body: JSON.stringify({
 				model: 'meta-llama/Llama-3-8b-chat-hf',
+				// model: 'meta-llama/Llama-3-70b-chat-hf',
 				max_tokens: 5000,
 				temperature: 0.7,
 				top_p: 0.7,
