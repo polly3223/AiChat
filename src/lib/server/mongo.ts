@@ -1,5 +1,5 @@
 import { SECRET_MONGO_CONNECTION } from '$env/static/private';
-import type { Chat, Message } from '$lib/client/types';
+import type { Chat } from '$lib/client/types';
 import { MongoClient } from 'mongodb';
 
 const client = new MongoClient(SECRET_MONGO_CONNECTION);

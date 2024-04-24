@@ -3,6 +3,8 @@ import { reqAuth } from '$lib/client/types';
 import { SECRET_PSW } from '$env/static/private';
 
 export const POST: RequestHandler = async ({ request, cookies }) => {
+	if (cookies.get('psw') === SECRET_PSW) return json({ success: true });
+
 	const x = await request.json();
 	const req = reqAuth.safeParse(x);
 	if (!req.success) return json({ success: false });
