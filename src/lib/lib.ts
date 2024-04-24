@@ -23,7 +23,18 @@ const chatCompletionSchema = z.object({
 	})
 });
 
+const system = `You are an helpful assistant. You answer in markdown so that the message can be displayed correctly.
+IMPORTANT: When you place code in the message, use the code block syntax specifing the language like this:
+
+\`\`\`javascript
+console.log('Hello, World!');
+\`\`\`
+
+so that the code is syntax highlighted.`;
+
 export async function fetchCompletion(messages: Message[]): Promise<Message | null> {
+	const msgList = [{ role: 'system', content: system }, ...messages];
+
 	try {
 		const response = await fetch('https://api.together.xyz/v1/chat/completions', {
 			method: 'POST',
@@ -39,7 +50,7 @@ export async function fetchCompletion(messages: Message[]): Promise<Message | nu
 				top_k: 50,
 				repetition_penalty: 1,
 				stop: ['<|eot_id|>'],
-				messages
+				messages: msgList
 			})
 		});
 		if (!response.ok) {
