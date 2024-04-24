@@ -23,7 +23,7 @@ const chatCompletionSchema = z.object({
 	})
 });
 
-const system = `You are an helpful assistant. You answer in markdown so that the message can be displayed correctly.
+const system = `You are an helpful assistant.
 IMPORTANT: When you place code in the message, use the code block syntax specifing the language like this:
 
 \`\`\`javascript
@@ -45,9 +45,8 @@ export async function fetchCompletion(messages: Message[]): Promise<Message | nu
 			body: JSON.stringify({
 				model: 'meta-llama/Llama-3-70b-chat-hf', // or 'meta-llama/Llama-3-8b-chat-hf'
 				max_tokens: 5000,
-				temperature: 0.7,
-				top_p: 0.7,
-				top_k: 50,
+				temperature: 1,
+				top_p: 1,
 				repetition_penalty: 1,
 				stop: ['<|eot_id|>'],
 				messages: msgList
