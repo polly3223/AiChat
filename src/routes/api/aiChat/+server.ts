@@ -1,7 +1,7 @@
 import { error, json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import { reqAiChatSchema } from '$lib/types';
-import { fetchCompletion } from '$lib/lib';
+import { reqAiChatSchema } from '$lib/client/types';
+import { fetchCompletion } from '$lib/server/lib';
 
 export const POST: RequestHandler = async ({ request }) => {
 	const x = await request.json();

@@ -2,9 +2,8 @@
 	import { derived, type Readable } from 'svelte/store';
 	import MarkdownIt from 'markdown-it';
 	import Shiki from '@shikijs/markdown-it';
-	import type { Message, RenderedMessage } from '$lib/types';
-
-	export let messages: Readable<Message[]>;
+	import type { Message, RenderedMessage } from '$lib/client/types';
+	import { messages } from '$lib/client/store';
 
 	let markdownIt: MarkdownIt;
 

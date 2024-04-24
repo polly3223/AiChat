@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { SECRET_TOGHETERAI_API_KEY } from '$env/static/private';
-import { messageSchema, type Message } from './types';
+import { messageSchema, type Message } from '../client/types';
 
 const chatCompletionSchema = z.object({
 	id: z.string(),
