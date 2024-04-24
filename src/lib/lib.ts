@@ -1,5 +1,27 @@
+import { z } from 'zod';
 import { SECRET_TOGHETERAI_API_KEY } from '$env/static/private';
-import { chatCompletionSchema, type Message } from './types';
+import { messageSchema, type Message } from './types';
+
+const chatCompletionSchema = z.object({
+	id: z.string(),
+	object: z.literal('chat.completion'),
+	created: z.number(),
+	model: z.string(),
+	prompt: z.array(z.null()),
+	choices: z.array(
+		z.object({
+			finish_reason: z.string(),
+			logprobs: z.null(),
+			index: z.number(),
+			message: messageSchema
+		})
+	),
+	usage: z.object({
+		prompt_tokens: z.number(),
+		completion_tokens: z.number(),
+		total_tokens: z.number()
+	})
+});
 
 export async function fetchCompletion(messages: Message[]): Promise<Message | null> {
 	try {

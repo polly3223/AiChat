@@ -4,14 +4,14 @@
 	import TextArea from './TextArea.svelte';
 	import { resAiChatSchema, type Message } from '$lib/types';
 
-	const messages = writable<Message[]>([{ role: 'assistant', content: 'Hello!' }]);
+	const messages = writable<Message[]>([]);
 
 	function addMessage(msg: Message) {
 		messages.update((m) => [...m, msg]);
 	}
 
 	messages.subscribe(async (msgs) => {
-		if (msgs[msgs.length - 1].role !== 'user') return;
+		if (msgs.length === 0 || msgs[msgs.length - 1].role !== 'user') return;
 
 		const answer = await fetch(`/api/aiChat`, {
 			method: 'POST',
