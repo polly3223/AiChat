@@ -1,5 +1,4 @@
-import { error, json } from '@sveltejs/kit';
-import type { RequestHandler } from './$types';
+import { error, json, type RequestHandler } from '@sveltejs/kit';
 import { reqAiChatSchema } from '$lib/client/types';
 import { fetchCompletion } from '$lib/server/lib';
 import { createChat } from '$lib/server/mongo';

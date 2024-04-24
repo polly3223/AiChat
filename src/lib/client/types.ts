@@ -12,6 +12,10 @@ export const reqAiChatSchema = z.object({
 	messages: z.array(messageSchema)
 });
 
+export const reqAuth = z.object({
+	psw: z.string()
+});
+
 export const resAiChatSchema = z.object({
 	completion: messageSchema
 });
