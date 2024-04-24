@@ -9,7 +9,6 @@
 		>
 			<div class="prose prose-sm max-w-[250px] md:max-w-[500px] lg:max-w-[1200px] overflow-y-auto">
 				{@html message.renderedText}
-				<!-- <pre>{message.content}</pre> -->
 			</div>
 		</div>
 	{/each}

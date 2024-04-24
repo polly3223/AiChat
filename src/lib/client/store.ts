@@ -27,18 +27,20 @@ export function addMessage(msg: Message) {
 }
 
 messages.subscribe(async (msgs) => {
-	const p = localStorage.getItem('psw');
+	if (browser) {
+		const p = localStorage.getItem('psw');
 
-	if (msgs.length === 0 || msgs[msgs.length - 1].role !== 'user' || p === null) return;
+		if (msgs.length === 0 || msgs[msgs.length - 1].role !== 'user' || p === null) return;
 
-	const answer = await fetch(`/api/aiChat`, {
-		method: 'POST',
-		headers: { 'Content-Type': 'application/json', psw: p },
-		body: JSON.stringify({ messages: msgs })
-	});
+		const answer = await fetch(`/api/aiChat`, {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json', psw: p },
+			body: JSON.stringify({ messages: msgs })
+		});
 
-	const res = await answer.json();
-	addMessage(resAiChatSchema.parse(res).completion);
+		const res = await answer.json();
+		addMessage(resAiChatSchema.parse(res).completion);
+	}
 });
 
 let markdownIt: MarkdownIt;

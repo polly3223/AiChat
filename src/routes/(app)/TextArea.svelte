@@ -22,7 +22,7 @@
 			>
 				<label for="comment" class="sr-only">{msgPlaceholder}</label>
 				<textarea
-					rows="5"
+					rows="4"
 					bind:value={text}
 					name="comment"
 					id="comment"
