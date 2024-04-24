@@ -1,33 +1,5 @@
 <script lang="ts">
-	import { derived, type Readable } from 'svelte/store';
-	import MarkdownIt from 'markdown-it';
-	import Shiki from '@shikijs/markdown-it';
-	import type { Message, RenderedMessage } from '$lib/client/types';
-	import { messages } from '$lib/client/store';
-
-	let markdownIt: MarkdownIt;
-
-	function getMd(): Promise<MarkdownIt> {
-		if (markdownIt) return Promise.resolve(markdownIt);
-		return new Promise(async (resolve) => {
-			markdownIt = MarkdownIt();
-			const shiki = await Shiki({
-				themes: { light: 'github-dark' }
-			});
-			markdownIt.use(shiki);
-			resolve(markdownIt);
-		});
-	}
-
-	export const renderedMessages = derived<Readable<Message[]>, RenderedMessage[]>(
-		messages,
-		($messages, set) => {
-			getMd().then((md) => {
-				set($messages.map((message) => ({ ...message, renderedText: md.render(message.content) })));
-			});
-		},
-		[]
-	);
+	import { renderedMessages } from '$lib/client/store';
 </script>
 
 <div class="flex flex-col pt-4">
