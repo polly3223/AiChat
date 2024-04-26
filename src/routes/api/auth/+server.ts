@@ -9,6 +9,12 @@ export const POST: RequestHandler = async ({ request, cookies }) => {
 	const req = reqAuth.safeParse(x);
 	if (!req.success) return json({ success: false });
 	if (req.data.psw !== SECRET_PSW) return json({ success: false });
-	cookies.set('psw', req.data.psw, { path: '/' });
+
+	// Set the cookie to expire in 30 days
+	const expiryDate = new Date();
+	expiryDate.setDate(expiryDate.getDate() + 30);
+
+	cookies.set('psw', req.data.psw, { path: '/', expires: expiryDate });
+
 	return json({ success: true });
 };
