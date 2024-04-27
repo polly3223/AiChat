@@ -1,5 +1,7 @@
 <script lang="ts">
+	import { v4 } from 'uuid';
 	import { createEventDispatcher } from 'svelte';
+	import { chatStore } from '$lib/client/store';
 
 	const msgPlaceholder = 'Message AI...';
 
@@ -11,6 +13,10 @@
 		if (text.trim() === '') return;
 		dispatch('message', { text });
 		text = '';
+	}
+
+	function clearChat() {
+		chatStore.set({ _id: v4(), title: 'New chat', messages: [] });
 	}
 </script>
 
@@ -33,25 +39,37 @@
 		</form>
 	</div>
 </div>
-<!-- class="inline-flex items-center align-items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600" -->
-<div class="flex justify-center pt-4">
-	<div class="flex-shrink-0">
-		<button
-			on:click={sendMessage}
-			type="submit"
-			class="inline-flex items-center align-items-center justify-center rounded-md bg-blue-100 px-2.5 py-1.5 text-sm font-semibold text-blue-600 shadow-sm hover:bg-blue-200"
+<div class="flex justify-center pt-4 gap-4">
+	<button
+		on:click={clearChat}
+		class="inline-flex items-center align-items-center justify-center rounded-md bg-blue-100 px-2.5 py-1.5 text-sm font-semibold text-blue-600 shadow-sm hover:bg-blue-200"
+	>
+		Clear Chat
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			viewBox="0 0 16 16"
+			fill="currentColor"
+			class="w-4 h-4 ml-1"
 		>
-			Send message
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				viewBox="0 0 16 16"
-				fill="currentColor"
-				class="w-4 h-4 ml-1"
-			>
-				<path
-					d="M2.87 2.298a.75.75 0 0 0-.812 1.021L3.39 6.624a1 1 0 0 0 .928.626H8.25a.75.75 0 0 1 0 1.5H4.318a1 1 0 0 0-.927.626l-1.333 3.305a.75.75 0 0 0 .811 1.022 24.89 24.89 0 0 0 11.668-5.115.75.75 0 0 0 0-1.175A24.89 24.89 0 0 0 2.869 2.298Z"
-				/>
-			</svg>
-		</button>
-	</div>
+			<path
+				d="M2.87 2.298a.75.75 0 0 0-.812 1.021L3.39 6.624a1 1 0 0 0 .928.626H8.25a.75.75 0 0 1 0 1.5H4.318a1 1 0 0 0-.927.626l-1.333 3.305a.75.75 0 0 0 .811 1.022 24.89 24.89 0 0 0 11.668-5.115.75.75 0 0 0 0-1.175A24.89 24.89 0 0 0 2.869 2.298Z"
+			/>
+		</svg>
+	</button>
+	<button
+		on:click={sendMessage}
+		class="inline-flex items-center align-items-center justify-center rounded-md bg-blue-100 px-2.5 py-1.5 text-sm font-semibold text-blue-600 shadow-sm hover:bg-blue-200"
+	>
+		Send message
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			viewBox="0 0 16 16"
+			fill="currentColor"
+			class="w-4 h-4 ml-1"
+		>
+			<path
+				d="M2.87 2.298a.75.75 0 0 0-.812 1.021L3.39 6.624a1 1 0 0 0 .928.626H8.25a.75.75 0 0 1 0 1.5H4.318a1 1 0 0 0-.927.626l-1.333 3.305a.75.75 0 0 0 .811 1.022 24.89 24.89 0 0 0 11.668-5.115.75.75 0 0 0 0-1.175A24.89 24.89 0 0 0 2.869 2.298Z"
+			/>
+		</svg>
+	</button>
 </div>

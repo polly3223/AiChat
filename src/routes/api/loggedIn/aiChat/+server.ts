@@ -8,7 +8,6 @@ export const POST: RequestHandler = async ({ request }) => {
 	const req = reqAiChatSchema.safeParse(x);
 	if (!req.success) error(404, 'Invalid request');
 	const chat = req.data.chat;
-	insertChat(chat);
 	const completion = await aiChatMsg(chat);
 	if (!completion) return error(500, 'Error fetching completion');
 	chat.messages.push(completion);

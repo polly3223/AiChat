@@ -15,14 +15,14 @@ chatStore.subscribe(async (c) => {
 	const msgs = c.messages;
 	if (msgs.length === 0 || msgs[msgs.length - 1].role !== 'user') return;
 
-	const answer = await fetch(`/api/loggedIn/aiChat`, {
+	const res = await fetch(`/api/loggedIn/aiChat`, {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify({ chat: c })
 	});
 
-	const res = await answer.json();
-	const chat = resAiChatSchema.parse(res).chat;
+	const resJson = await res.json();
+	const chat = resAiChatSchema.parse(resJson).chat;
 	chatStore.set(chat);
 });
 
