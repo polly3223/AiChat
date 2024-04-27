@@ -7,7 +7,7 @@ export const messageSchema = z.object({
 
 export const chatSchema = z.object({
 	_id: z.string(),
-	name: z.string(),
+	title: z.string(),
 	messages: z.array(messageSchema)
 });
 
@@ -32,5 +32,5 @@ export const reqAuth = z.object({
 });
 
 export const resAiChatSchema = z.object({
-	completion: messageSchema
+	chat: chatSchema
 });

@@ -6,7 +6,7 @@ import Shiki from '@shikijs/markdown-it';
 import type { Chat, Message, RenderedMessage } from '$lib/client/types';
 import { v4 } from 'uuid';
 
-export const chatStore = writable<Chat>({ _id: v4(), name: 'New chat', messages: [] });
+export const chatStore = writable<Chat>({ _id: v4(), title: 'New chat', messages: [] });
 export function addMessage(msg: Message) {
 	chatStore.update((c) => ({ ...c, messages: [...c.messages, msg] }));
 }
@@ -22,7 +22,8 @@ chatStore.subscribe(async (c) => {
 	});
 
 	const res = await answer.json();
-	addMessage(resAiChatSchema.parse(res).completion);
+	const chat = resAiChatSchema.parse(res).chat;
+	chatStore.set(chat);
 });
 
 let markdownIt: MarkdownIt;

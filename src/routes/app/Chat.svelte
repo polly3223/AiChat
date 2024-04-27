@@ -1,7 +1,8 @@
 <script lang="ts">
-	import { renderedMessages } from '$lib/client/store';
+	import { chatStore, renderedMessages } from '$lib/client/store';
 </script>
 
+<h1 class="text-lg text-center md:text-left px-3 font-semibold">{$chatStore.title}</h1>
 <div class="flex flex-col pt-4">
 	{#each $renderedMessages as message}
 		<div
