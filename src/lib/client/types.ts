@@ -11,8 +11,16 @@ export const chatSchema = z.object({
 	messages: z.array(messageSchema)
 });
 
+export const logSchema = z.object({
+	_id: z.string(),
+	date: z.date(),
+	messages: z.array(messageSchema),
+	answer: z.union([messageSchema, z.string()])
+});
+
 export type Message = z.infer<typeof messageSchema>;
 export type Chat = z.infer<typeof chatSchema>;
+export type Log = z.infer<typeof logSchema>;
 export type RenderedMessage = Message & { renderedText: string };
 
 export const reqAiChatSchema = z.object({
