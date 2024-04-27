@@ -17,10 +17,8 @@ export async function aiChatMsg(chat: Chat): Promise<Message | null> {
 	return completion;
 }
 
-const chatTitleSystemMsg = `
-Can you help me with the title of this chat? No more than 100 characters, please.
-
-IMPORTANT!: ONLY the title of the chat should be in the message, nothing else, do not put the title inside \"\" or ''.
+const chatTitleSystemMsg = `Can write a title of this chat? No more than 100 characters.
+IMPORTANT: Only the title of the chat should be in the message, nothing else, do not put the title inside \"\" or ''.
 `;
 
 export async function aiChatTitle(chat: Chat): Promise<string> {

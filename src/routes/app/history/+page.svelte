@@ -28,7 +28,7 @@
 					<div class="min-w-0 flex-1">
 						<button class="focus:outline-none" on:click={() => loadChat(c._id)}>
 							<span class="absolute inset-0" aria-hidden="true"></span>
-							<p class="text-sm font-medium text-gray-900">{c.title}</p>
+							<p class="text-sm font-medium text-gray-900 text-left">{c.title}</p>
 						</button>
 					</div>
 				</div>
