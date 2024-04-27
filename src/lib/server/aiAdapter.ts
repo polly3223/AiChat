@@ -59,6 +59,6 @@ async function aiCall(model: ModelType, msgList: Message[]): Promise<Message | s
 
 export async function ai(model: ModelType, msgList: Message[]): Promise<Message | string> {
 	const completion = await aiCall(model, msgList);
-	insertLog({ _id: v4(), date: new Date(), messages: msgList, answer: completion });
+	insertLog({ _id: v4(), date: new Date(), model, messages: msgList, answer: completion });
 	return completion;
 }
