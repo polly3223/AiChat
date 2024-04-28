@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Logo from './Logo.svelte';
 	import Sidebar from './Sidebar.svelte';
 
 	let mobileShowSidebar = false;
@@ -74,6 +75,8 @@
 				/>
 			</svg>
 		</button>
+
+		<Logo />
 	</div>
 
 	<main class="lg:pl-72 bg-gray-100">
