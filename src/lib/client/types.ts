@@ -15,6 +15,7 @@ export const logSchema = z.object({
 	_id: z.string(),
 	date: z.date(),
 	model: z.string(),
+	operation: z.string(),
 	messages: z.array(messageSchema),
 	answer: z.union([messageSchema, z.string()])
 });
