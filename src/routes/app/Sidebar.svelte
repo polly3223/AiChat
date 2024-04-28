@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import logo from '$lib/assets/logo.png';
 
 	function classWhenActive(path: string, currentPath: string) {
 		return path === currentPath
@@ -8,12 +9,12 @@
 	}
 </script>
 
-<div class="flex h-16 shrink-0 items-center">
-	<img
-		class="h-8 w-auto"
-		src="https://tailwindui.com/img/logos/mark.svg?color=blue&shade=500"
-		alt="Your Company"
-	/>
+<div class="flex h-16 shrink-0 items-center text-white">
+	<div class="flex items-center">
+		<img class="h-8 pl-0" src={logo} alt="AiChat logo" />
+		<span class="h-8 whitespace-nowrap pl-2 text-xl sm:text-2xl font-light">Ai</span>
+		<span class="h-8 whitespace-nowrap text-xl sm:text-2xl font-bold">Chat</span>
+	</div>
 </div>
 <nav class="flex flex-1 flex-col">
 	<ul role="list" class="flex flex-1 flex-col gap-y-7">
