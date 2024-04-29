@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { chatStore, renderedMessages } from '$lib/client/store';
+	import { chatStore, deleteMessage, renderedMessages } from '$lib/client/store';
 
 	function copyMessage(message: string) {
 		navigator.clipboard.writeText(message);
@@ -8,7 +8,7 @@
 
 <h1 class="text-lg text-center md:text-left px-3 font-semibold">{$chatStore.title}</h1>
 <div class="flex flex-col pt-4">
-	{#each $renderedMessages as message}
+	{#each $renderedMessages as message, index (index)}
 		<div
 			class={`overflow-hidden px-3 pt-2 m-2 rounded-lg shadow-sm ring-1 ring-inset ring-gray-300 ${message.role === 'user' ? 'ml-auto bg-blue-100' : 'mr-auto bg-white'}`}
 		>
@@ -38,7 +38,7 @@
 					</svg>
 				</button>
 
-				<button class="text-gray-500 hover:text-gray-700">
+				<button class="text-gray-500 hover:text-gray-700" on:click={() => deleteMessage(index)}>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						fill="none"

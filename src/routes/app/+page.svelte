@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Chat from './Chat.svelte';
 	import TextArea from './TextArea.svelte';
-	import { addMessage } from '$lib/client/store';
+	import { addUserMessage } from '$lib/client/store';
 </script>
 
 <div class="flex flex-col h-[calc(100dvh-64px)] lg:h-dvh">
@@ -11,7 +11,7 @@
 	<div class="mt-auto p-2 pt-0">
 		<TextArea
 			on:message={(evt) => {
-				addMessage({ role: 'user', content: evt.detail.text });
+				addUserMessage({ role: 'user', content: evt.detail.text });
 			}}
 		/>
 	</div>
