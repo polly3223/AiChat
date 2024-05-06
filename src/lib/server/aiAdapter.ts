@@ -15,32 +15,18 @@ type ModelNoTools = 'meta-llama/Llama-3-70b-chat-hf' | 'meta-llama/Llama-3-8b-ch
 export async function completion(
 	model: ModelAllowTools | ModelNoTools,
 	operation: string,
-	msgList: Message[]
+	messages: Message[]
 ): Promise<string | null> {
 	try {
 		const response = await client.chat.completions.create({
 			model,
-			messages: msgList
+			messages
 		});
 		const content = response.choices[0].message.content;
-		insertLog({
-			_id: v4(),
-			date: new Date(),
-			model,
-			operation,
-			messages: msgList,
-			res: content
-		});
+		insertLog({ model, operation, messages, res: content });
 		return content;
 	} catch (error: any) {
-		insertLog({
-			_id: v4(),
-			date: new Date(),
-			model,
-			operation,
-			messages: msgList,
-			res: error.error
-		});
+		insertLog({ model, operation, messages, res: error.error });
 		return null;
 	}
 }

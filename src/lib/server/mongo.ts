@@ -1,6 +1,7 @@
 import { SECRET_MONGO_CONNECTION } from '$env/static/private';
 import type { Chat, Log } from '$lib/client/types';
 import { MongoClient } from 'mongodb';
+import { v4 } from 'uuid';
 
 const client = new MongoClient(SECRET_MONGO_CONNECTION);
 await client.connect();
@@ -13,8 +14,8 @@ export async function insertChat(chat: Chat) {
 	return chats.replaceOne({ _id: chat._id }, chat, { upsert: true });
 }
 
-export async function insertLog(log: Log) {
-	return logs.insertOne(log);
+export async function insertLog(log: Omit<Log, '_id' | 'date'>) {
+	return logs.insertOne({ date: new Date(), _id: v4(), ...log });
 }
 
 export async function getChatHistory(): Promise<{ _id: string; title: string }[]> {
