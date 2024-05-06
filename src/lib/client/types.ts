@@ -17,7 +17,7 @@ export const logSchema = z.object({
 	model: z.string(),
 	operation: z.string(),
 	messages: z.array(messageSchema),
-	answer: z.union([messageSchema, z.string()])
+	res: z.union([messageSchema, z.any()])
 });
 
 export type Message = z.infer<typeof messageSchema>;
