@@ -1,5 +1,5 @@
 import { type Message, type Chat } from '../client/types';
-import { completion } from './aiAdapter';
+import { aiClient } from './aiAdapter';
 
 const chatSystemMsg = `You are an helpful assistant.
 IMPORTANT: When you place code in the message, use the code block syntax specifing the language like this:
@@ -12,7 +12,7 @@ so that the code is syntax highlighted.`;
 
 export async function aiChatMsg(chat: Chat): Promise<Message | null> {
 	const msgList: Message[] = [{ role: 'system', content: chatSystemMsg }, ...chat.messages];
-	const content = await completion('llama3-70b-8192', 'ChatMsg', msgList);
+	const content = await aiClient.advancedCompletion('ChatMsg', msgList);
 	if (!content) return null;
 	return { role: 'assistant', content };
 }
@@ -23,7 +23,7 @@ IMPORTANT: Only the title of the chat should be in the message, nothing else, do
 
 export async function aiChatTitle(chat: Chat): Promise<string> {
 	const msgList: Message[] = [...chat.messages, { role: 'user', content: chatTitleSystemMsg }];
-	const content = await completion('llama3-8b-8192', 'ChatTitle', msgList);
+	const content = await aiClient.simpleCompletion('ChatTitle', msgList);
 	if (!content) return 'CANNOT GENERATE TITLE';
 	return content;
 }

@@ -14,6 +14,7 @@ export const chatSchema = z.object({
 export const logSchema = z.object({
 	_id: z.string(),
 	date: z.date(),
+	apiProvider: z.string(),
 	model: z.string(),
 	operation: z.string(),
 	messages: z.array(messageSchema),

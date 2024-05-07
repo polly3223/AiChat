@@ -3,25 +3,41 @@ import { type Message } from '../client/types';
 import { insertLog } from './mongo';
 import Groq from 'groq-sdk';
 
-const client = new Groq({ apiKey: SECRET_GROQ_API_KEY });
+interface AiClient {
+	simpleCompletion: (operation: string, messages: Message[]) => Promise<string | null>;
+	advancedCompletion: (operation: string, messages: Message[]) => Promise<string | null>;
+}
 
-type ModelType = 'llama3-8b-8192' | 'llama3-70b-8192';
+class GroqClient implements AiClient {
+	private client = new Groq({ apiKey: SECRET_GROQ_API_KEY });
 
-export async function completion(
-	model: ModelType,
-	operation: string,
-	messages: Message[]
-): Promise<string | null> {
-	try {
-		const response = await client.chat.completions.create({
-			model,
-			messages
-		});
-		const content = response.choices[0].message.content;
-		insertLog({ model, operation, messages, usage: response.usage, res: content });
-		return content;
-	} catch (error: any) {
-		insertLog({ model, operation, messages, res: error.error });
-		return error.error.message;
+	async simpleCompletion(operation: string, messages: Message[]): Promise<string | null> {
+		const model = 'llama3-8b-8192';
+		const apiProvider = 'groq';
+		try {
+			const response = await this.client.chat.completions.create({ model, messages });
+			const content = response.choices[0].message.content;
+			insertLog({ model, apiProvider, operation, messages, usage: response.usage, res: content });
+			return content;
+		} catch (error: any) {
+			insertLog({ model, apiProvider, operation, messages, res: error.error });
+			return null;
+		}
+	}
+
+	async advancedCompletion(operation: string, messages: Message[]): Promise<string | null> {
+		const model = 'llama3-70b-8192';
+		const apiProvider = 'groq';
+		try {
+			const response = await this.client.chat.completions.create({ model, messages });
+			const content = response.choices[0].message.content;
+			insertLog({ model, apiProvider, operation, messages, usage: response.usage, res: content });
+			return content;
+		} catch (error: any) {
+			insertLog({ model, apiProvider, operation, messages, res: error.error });
+			return null;
+		}
 	}
 }
+
+export const aiClient: AiClient = new GroqClient();
