@@ -12,7 +12,7 @@ so that the code is syntax highlighted.`;
 
 export async function aiChatMsg(chat: Chat): Promise<Message | null> {
 	const msgList: Message[] = [{ role: 'system', content: chatSystemMsg }, ...chat.messages];
-	const content = await completion('meta-llama/Llama-3-70b-chat-hf', 'ChatMsg', msgList);
+	const content = await completion('llama3-70b-8192', 'ChatMsg', msgList);
 	if (!content) return null;
 	return { role: 'assistant', content };
 }
@@ -23,7 +23,7 @@ IMPORTANT: Only the title of the chat should be in the message, nothing else, do
 
 export async function aiChatTitle(chat: Chat): Promise<string> {
 	const msgList: Message[] = [...chat.messages, { role: 'user', content: chatTitleSystemMsg }];
-	const content = await completion('meta-llama/Llama-3-8b-chat-hf', 'ChatTitle', msgList);
+	const content = await completion('llama3-8b-8192', 'ChatTitle', msgList);
 	if (!content) return 'CANNOT GENERATE TITLE';
 	return content;
 }

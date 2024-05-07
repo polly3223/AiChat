@@ -17,6 +17,7 @@ export const logSchema = z.object({
 	model: z.string(),
 	operation: z.string(),
 	messages: z.array(messageSchema),
+	usage: z.any(),
 	res: z.union([messageSchema, z.any()])
 });
 
