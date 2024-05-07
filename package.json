@@ -25,6 +25,7 @@
 		"groq-sdk": "^0.3.3",
 		"markdown-it": "^14.1.0",
 		"mongodb": "^6.5.0",
+		"openai": "^4.42.0",
 		"postcss": "^8.4.38",
 		"prettier": "^3.1.1",
 		"prettier-plugin-svelte": "^3.1.2",
