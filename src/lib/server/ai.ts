@@ -12,7 +12,7 @@ so that the code is syntax highlighted.`;
 
 export async function aiChatMsg(chat: Chat): Promise<Message | null> {
 	const msgList: Message[] = [{ role: 'system', content: chatSystemMsg }, ...chat.messages];
-	const content = await aiClient.advancedCompletion('ChatMsg', msgList);
+	const content = await aiClient.completion('ChatMsg', msgList);
 	if (!content) return null;
 	return { role: 'assistant', content };
 }
