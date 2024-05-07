@@ -2,6 +2,7 @@ import { SECRET_MONGO_CONNECTION } from '$env/static/private';
 import type { Chat, Log } from '$lib/client/types';
 import { MongoClient } from 'mongodb';
 import { v4 } from 'uuid';
+import type { Info } from './ai';
 
 const client = new MongoClient(SECRET_MONGO_CONNECTION);
 await client.connect();
@@ -9,6 +10,7 @@ await client.connect();
 const db = client.db('AiChat', { ignoreUndefined: true });
 const chats = db.collection<Chat>('chats');
 const logs = db.collection<Log>('logs');
+const infos = db.collection<Info>('infos');
 
 export async function insertChat(chat: Chat) {
 	return chats.replaceOne({ _id: chat._id }, chat, { upsert: true });
@@ -16,6 +18,10 @@ export async function insertChat(chat: Chat) {
 
 export async function insertLog(log: Omit<Log, '_id' | 'date'>) {
 	return logs.insertOne({ date: new Date(), _id: v4(), ...log });
+}
+
+export async function insertInfolist(infolist: Info[]) {
+	return infos.insertMany(infolist);
 }
 
 export async function getChatHistory(): Promise<{ _id: string; title: string }[]> {
