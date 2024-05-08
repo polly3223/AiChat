@@ -1,4 +1,8 @@
-import { SECRET_GROQ_API_KEY, SECRET_TOGHETERAI_API_KEY } from '$env/static/private';
+import {
+	SECRET_GROQ_API_KEY,
+	SECRET_TOGHETERAI_API_KEY,
+	SECRET_FIREWORKS_API_KEY
+} from '$env/static/private';
 import { type Message } from '../client/types';
 import { insertLog } from './mongo';
 import Groq from 'groq-sdk';
@@ -50,5 +54,21 @@ class ToghetherAiClient implements AiClient {
 	}
 }
 
+class FireworksAiClient implements AiClient {
+	private client = new OpenAI({
+		apiKey: SECRET_FIREWORKS_API_KEY,
+		baseURL: 'https://api.fireworks.ai/inference/v1'
+	});
+	async simpleCompletion(operation: string, messages: Message[]): Promise<string | null> {
+		const model = 'accounts/fireworks/models/llama-v3-8b-instruct-hf';
+		return c('FireworksAi', operation, this.client, model, messages);
+	}
+	async completion(operation: string, messages: Message[]): Promise<string | null> {
+		const model = 'accounts/fireworks/models/llama-v3-70b-instruct-hf';
+		return c('FireworksAi', operation, this.client, model, messages);
+	}
+}
+
 // export const aiClient: AiClient = new GroqClient();
-export const aiClient: AiClient = new ToghetherAiClient();
+// export const aiClient: AiClient = new ToghetherAiClient();
+export const aiClient: AiClient = new FireworksAiClient();
