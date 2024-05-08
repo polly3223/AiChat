@@ -22,11 +22,10 @@ async function c(
 ): Promise<string | null> {
 	try {
 		const response = await client.chat.completions.create({ model, messages });
-		const content = response.choices[0].message.content;
-		insertLog({ model, apiProvider, operation, messages, usage: response.usage, res: content });
-		return content;
+		insertLog({ apiProvider, model, operation, messages, response });
+		return response.choices[0].message.content;
 	} catch (error: any) {
-		insertLog({ model, apiProvider, operation, messages, res: error });
+		insertLog({ apiProvider, model, operation, messages, error });
 		return null;
 	}
 }

@@ -49,7 +49,7 @@ When during the conversation with the user you get to know some information that
 - link web
 etc
 You should SAVE this information, but only save important information that you think will be useful in the future, do not save everything the user says.
-If you or the user need informations that may saved in the DB you should READ.
+If you or the user need informations with type that may saved in the DB like events you should READ and inform the user that you will inform the user about the information jsut after reading the DB.
 
 const infoSchema = z
 	.object({
