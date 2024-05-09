@@ -104,16 +104,16 @@ export async function aiChatMsg(chat: Chat): Promise<Message | null> {
 	const content = await aiClient.completion('ChatMsg', msgList);
 	if (!content) return null;
 
-	const [answer, json] = content.split('----------DIV-----------');
+	// const [answer, json] = content.split('----------DIV-----------');
 
-	const parsed = operationSchema.safeParse(JSON.parse(json));
-	if (parsed.success) {
-		if (parsed.data.operation === 'SAVE') {
-			insertInfolist(parsed.data.infolist);
-		}
-	} else {
-		console.log(parsed.error);
-	}
+	// const parsed = operationSchema.safeParse(JSON.parse(json));
+	// if (parsed.success) {
+	// 	if (parsed.data.operation === 'SAVE') {
+	// 		insertInfolist(parsed.data.infolist);
+	// 	}
+	// } else {
+	// 	console.log(parsed.error);
+	// }
 
 	return { role: 'assistant', content };
 }
