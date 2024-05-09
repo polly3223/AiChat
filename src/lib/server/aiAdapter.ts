@@ -21,7 +21,7 @@ async function c(
 	messages: Message[]
 ): Promise<string | null> {
 	try {
-		const response = await client.chat.completions.create({ model, messages });
+		const response = await client.chat.completions.create({ model, messages, max_tokens: 5000 });
 		insertLog({ apiProvider, model, operation, messages, response });
 		return response.choices[0].message.content;
 	} catch (error: any) {
