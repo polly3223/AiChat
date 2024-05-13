@@ -4,7 +4,9 @@ import { MongoClient } from 'mongodb';
 import { v4 } from 'uuid';
 import type { Info } from './ai';
 
-const client = new MongoClient(SECRET_MONGO_CONNECTION);
+const connection = process.env.MONGODB_URI ? process.env.MONGODB_URI : SECRET_MONGO_CONNECTION;
+
+const client = new MongoClient(connection);
 await client.connect();
 
 const db = client.db('AiChat', { ignoreUndefined: true });
