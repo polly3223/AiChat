@@ -1,6 +1,6 @@
 {
 	"functions": {
-		"api/loggedIn/aiChat/+server.js": {
+		"api/**/*.js": {
 			"maxDuration": 30
 		}
 	}
