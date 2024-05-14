@@ -1,0 +1,7 @@
+{
+    "functions": {
+      "src/routes/api/*": {
+        "maxDuration": 30
+      }
+    }
+  }
