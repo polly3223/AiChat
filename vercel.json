@@ -1,6 +1,6 @@
 {
 	"functions": {
-		"src/routes/api/loggedIn/aiChat/+server.ts": {
+		"api/loggedIn/aiChat/+server.js": {
 			"maxDuration": 30
 		}
 	}
