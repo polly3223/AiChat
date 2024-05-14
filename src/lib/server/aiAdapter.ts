@@ -1,7 +1,8 @@
 import {
 	SECRET_GROQ_API_KEY,
 	SECRET_TOGHETERAI_API_KEY,
-	SECRET_FIREWORKS_API_KEY
+	SECRET_FIREWORKS_API_KEY,
+	SECRET_OPENAI_API_KEY
 } from '$env/static/private';
 import { type Message } from '../client/types';
 import { insertLog } from './mongo';
@@ -21,7 +22,7 @@ async function c(
 	messages: Message[]
 ): Promise<string | null> {
 	try {
-		const response = await client.chat.completions.create({ model, messages, max_tokens: 5000 });
+		const response = await client.chat.completions.create({ model, messages, max_tokens: 4095 });
 		insertLog({ apiProvider, model, operation, messages, response });
 		return response.choices[0].message.content;
 	} catch (error: any) {
@@ -68,6 +69,17 @@ class FireworksAiClient implements AiClient {
 	}
 }
 
+class OpenAiClient implements AiClient {
+	private client = new OpenAI({ apiKey: SECRET_OPENAI_API_KEY });
+	async simpleCompletion(operation: string, messages: Message[]): Promise<string | null> {
+		return c('OpenAi', operation, this.client, 'gpt-3.5-turbo', messages);
+	}
+	async completion(operation: string, messages: Message[]): Promise<string | null> {
+		return c('OpenAi', operation, this.client, 'gpt-4o', messages);
+	}
+}
+
 // export const aiClient: AiClient = new GroqClient();
-export const aiClient: AiClient = new ToghetherAiClient();
+// export const aiClient: AiClient = new ToghetherAiClient();
 // export const aiClient: AiClient = new FireworksAiClient();
+export const aiClient: AiClient = new OpenAiClient();
