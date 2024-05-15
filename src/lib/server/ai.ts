@@ -1,5 +1,4 @@
 import { type Message, type Chat } from '../client/types';
-import { z } from 'zod';
 import { aiClient } from './aiAdapter';
 
 const chatSystemMsg = `You are an helpful assistant and you try to provide the best answers to the user.
