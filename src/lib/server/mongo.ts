@@ -3,8 +3,12 @@ import type { Chat, Log } from '$lib/client/types';
 import { MongoClient } from 'mongodb';
 import { v4 } from 'uuid';
 
-const client = new MongoClient(SECRET_MONGO_CONNECTION);
-await client.connect();
+const client = new MongoClient(SECRET_MONGO_CONNECTION, {});
+try {
+	client.connect();
+} catch (e) {
+	console.error('Failed to connect to MongoDB');
+}
 
 const db = client.db('AiChat', { ignoreUndefined: true });
 const chats = db.collection<Chat>('chats');
