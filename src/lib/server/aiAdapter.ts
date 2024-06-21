@@ -58,11 +58,9 @@ async function cAnt(
 			max_tokens: 4095,
 			system
 		});
-		console.log(response);
 		insertLog({ apiProvider, model, operation, messages, response });
 		return response.content[0].type === 'text' ? response.content[0].text : null;
 	} catch (error: any) {
-		console.log(error);
 		insertLog({ apiProvider, model, operation, messages, error });
 		return null;
 	}
