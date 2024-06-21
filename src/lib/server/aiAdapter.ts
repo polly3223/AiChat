@@ -2,12 +2,14 @@ import {
 	SECRET_GROQ_API_KEY,
 	SECRET_TOGHETERAI_API_KEY,
 	SECRET_FIREWORKS_API_KEY,
-	SECRET_OPENAI_API_KEY
+	SECRET_OPENAI_API_KEY,
+	SECRET_ANTHROPIC_API_KEY
 } from '$env/static/private';
 import { type Message } from '../client/types';
 import { insertLog } from './mongo';
 import Groq from 'groq-sdk';
 import OpenAI from 'openai';
+import Anthropic from '@anthropic-ai/sdk';
 
 interface AiClient {
 	simpleCompletion: (operation: string, messages: Message[]) => Promise<string | null>;
@@ -26,6 +28,41 @@ async function c(
 		insertLog({ apiProvider, model, operation, messages, response });
 		return response.choices[0].message.content;
 	} catch (error: any) {
+		insertLog({ apiProvider, model, operation, messages, error });
+		return null;
+	}
+}
+
+async function cAnt(
+	apiProvider: string,
+	operation: string,
+	client: Anthropic,
+	model: string,
+	messages: Message[]
+): Promise<string | null> {
+	const messagesAnthropicFormat = messages
+		.filter((message) => message.role !== 'system')
+		.map((message) => {
+			return {
+				role: message.role,
+				content: [{ type: 'text', text: message.content }]
+			};
+		}) as any;
+
+	const system = messages.find((message) => message.role === 'system')?.content;
+
+	try {
+		const response = await client.messages.create({
+			model,
+			messages: messagesAnthropicFormat,
+			max_tokens: 4095,
+			system
+		});
+		console.log(response);
+		insertLog({ apiProvider, model, operation, messages, response });
+		return response.content[0].type === 'text' ? response.content[0].text : null;
+	} catch (error: any) {
+		console.log(error);
 		insertLog({ apiProvider, model, operation, messages, error });
 		return null;
 	}
@@ -79,7 +116,18 @@ class OpenAiClient implements AiClient {
 	}
 }
 
+class AnthropicClient implements AiClient {
+	private client = new Anthropic({ apiKey: SECRET_ANTHROPIC_API_KEY });
+	async simpleCompletion(operation: string, messages: Message[]): Promise<string | null> {
+		return cAnt('Anthropic', operation, this.client, 'claude-3-haiku-20240307', messages);
+	}
+	async completion(operation: string, messages: Message[]): Promise<string | null> {
+		return cAnt('Anthropic', operation, this.client, 'claude-3-5-sonnet-20240620', messages);
+	}
+}
+
 // export const aiClient: AiClient = new GroqClient();
 // export const aiClient: AiClient = new ToghetherAiClient();
 // export const aiClient: AiClient = new FireworksAiClient();
-export const aiClient: AiClient = new OpenAiClient();
+// export const aiClient: AiClient = new OpenAiClient();
+export const aiClient: AiClient = new AnthropicClient();
