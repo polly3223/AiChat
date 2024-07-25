@@ -95,11 +95,11 @@ class FireworksAiClient implements AiClient {
 		baseURL: 'https://api.fireworks.ai/inference/v1'
 	});
 	async simpleCompletion(operation: string, messages: Message[]): Promise<string | null> {
-		const model = 'accounts/fireworks/models/llama-v3-8b-instruct-hf';
+		const model = 'accounts/fireworks/models/llama-v3p1-8b-instruct';
 		return c('FireworksAi', operation, this.client, model, messages);
 	}
 	async completion(operation: string, messages: Message[]): Promise<string | null> {
-		const model = 'accounts/fireworks/models/llama-v3-70b-instruct-hf';
+		const model = 'accounts/fireworks/models/llama-v3p1-405b-instruct';
 		return c('FireworksAi', operation, this.client, model, messages);
 	}
 }
@@ -126,6 +126,6 @@ class AnthropicClient implements AiClient {
 
 // export const aiClient: AiClient = new GroqClient();
 // export const aiClient: AiClient = new ToghetherAiClient();
-// export const aiClient: AiClient = new FireworksAiClient();
+export const aiClient: AiClient = new FireworksAiClient();
 // export const aiClient: AiClient = new OpenAiClient();
-export const aiClient: AiClient = new AnthropicClient();
+// export const aiClient: AiClient = new AnthropicClient();
