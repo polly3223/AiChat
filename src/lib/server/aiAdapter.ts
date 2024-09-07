@@ -126,6 +126,6 @@ class AnthropicClient implements AiClient {
 
 // export const aiClient: AiClient = new GroqClient();
 // export const aiClient: AiClient = new ToghetherAiClient();
-export const aiClient: AiClient = new FireworksAiClient();
+// export const aiClient: AiClient = new FireworksAiClient();
 // export const aiClient: AiClient = new OpenAiClient();
-// export const aiClient: AiClient = new AnthropicClient();
+export const aiClient: AiClient = new AnthropicClient();
